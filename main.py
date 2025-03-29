@@ -11,7 +11,7 @@ import urllib.request
 
 # GitHub repo config
 GITHUB_USERNAME = "TaikiB0t"
-GITHUB_REPO = "zeldos_bot"
+GITHUB_REPO = "zelda_zelebot"
 GITHUB_BRANCH = "main"
 
 # Base paths for raw GitHub image access
