@@ -60,7 +60,10 @@ if not DATABASE_URL:
     raise ValueError("❌ DATABASE_URL is not set! Add it in Railway's environment variables.")
 
 # ✅ List of admin user IDs (replace with actual Telegram user IDs)
-BOT_ADMINS = [os.getenv("ADMIN1"), os.getenv("ADMIN2")]  # Add your Telegram user IDs here
+# Load from Railway environment
+admin_env = os.getenv("BOT_ADMINS", "")
+# Parse the comma-separated string into a list of integers
+BOT_ADMINS = [int(uid.strip()) for uid in admin_env.split(",") if uid.strip().isdigit()]
 
 # ✅ Replace with your actual Telegram group ID
 TARGET_GROUP_ID = os.getenv("TARGET_GROUP_ID")
