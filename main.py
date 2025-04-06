@@ -8,6 +8,7 @@ import random
 import time
 import json
 import urllib.request
+import asyncio
 
 # GitHub repo config
 GITHUB_USERNAME = "TaikiB0t"
@@ -175,10 +176,11 @@ def escape_markdown(text: str) -> str:
     return ""
 
 
-def notify_admin(app):
+async def notify_admin(app):
+    await asyncio.sleep(5)  # optional wait for stability
     if BOT_ADMINS:
         try:
-            app.bot.send_message(chat_id=BOT_ADMINS[0], text="🌞 няв 🌝")
+            await app.bot.send_message(chat_id=BOT_ADMINS[0], text="🌞 няв 🌝")
             print("✅ Startup notification sent to admin.")
         except Exception as e:
             print(f"❌ Failed to notify admin: {e}")
@@ -461,6 +463,9 @@ def main():
     app.add_handler(CallbackQueryHandler(tea_callback, pattern=r"^tea_"))
 
     app.add_handler(MessageHandler(filters.ALL, track_users))  # Track users who send messages
+
+    # Schedule notification after bot starts
+    asyncio.get_event_loop().create_task(notify_admin(app))
 
     print("Bot is running...")
     app.run_polling()
