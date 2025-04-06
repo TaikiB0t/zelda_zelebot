@@ -309,7 +309,7 @@ async def tea_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         for cat in ["Випадковий"] + TEA_CATEGORIES
     ]
     markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text("🍵 Який чай бажаєш спробувати?", reply_markup=markup)
+    await update.message.reply_text("няв 🍵?", reply_markup=markup)
 
 
 async def tea_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -433,6 +433,9 @@ async def track_users(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
+    print("⏳ Waiting 5 seconds before starting the bot...")
+    time.sleep(5)  # ⏱️ Delay startup
+
     """Start the bot"""
     setup_database()  # Ensure database is set up on start
     app = Application.builder().token(TOKEN).build()
