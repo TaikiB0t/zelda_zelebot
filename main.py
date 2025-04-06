@@ -175,6 +175,15 @@ def escape_markdown(text: str) -> str:
     return ""
 
 
+def notify_admin(app):
+    if BOT_ADMINS:
+        try:
+            await app.bot.send_message(chat_id=BOT_ADMINS[0], text="🌞 няв 🌝")
+            print("✅ Startup notification sent to admin.")
+        except Exception as e:
+            print(f"❌ Failed to notify admin: {e}")
+
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handles the /start command"""
     await update.message.reply_text("мяу")
@@ -440,6 +449,7 @@ def main():
     """Start the bot"""
     setup_database()  # Ensure database is set up on start
     app = Application.builder().token(TOKEN).build()
+    notify_admin(app)
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler(["tagall", "all"], tag_all))
