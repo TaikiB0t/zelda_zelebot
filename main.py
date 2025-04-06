@@ -450,7 +450,10 @@ def main():
 
     """Start the bot"""
     setup_database()  # Ensure database is set up on start
-    app = Application.builder().token(TOKEN).build()
+
+    # ✅ Use post_init to call notify_admin after bot is ready
+    app = Application.builder().token(TOKEN).post_init(notify_admin).build()
+
     notify_admin(app)
 
     app.add_handler(CommandHandler("start", start))
@@ -463,9 +466,6 @@ def main():
     app.add_handler(CallbackQueryHandler(tea_callback, pattern=r"^tea_"))
 
     app.add_handler(MessageHandler(filters.ALL, track_users))  # Track users who send messages
-
-    # Schedule notification after bot starts
-    asyncio.get_event_loop().create_task(notify_admin(app))
 
     print("Bot is running...")
     app.run_polling()
