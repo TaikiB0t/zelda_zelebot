@@ -178,7 +178,7 @@ def escape_markdown(text: str) -> str:
 def notify_admin(app):
     if BOT_ADMINS:
         try:
-            await app.bot.send_message(chat_id=BOT_ADMINS[0], text="🌞 няв 🌝")
+            app.bot.send_message(chat_id=BOT_ADMINS[0], text="🌞 няв 🌝")
             print("✅ Startup notification sent to admin.")
         except Exception as e:
             print(f"❌ Failed to notify admin: {e}")
