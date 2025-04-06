@@ -454,8 +454,6 @@ def main():
     # ✅ Use post_init to call notify_admin after bot is ready
     app = Application.builder().token(TOKEN).post_init(notify_admin).build()
 
-    notify_admin(app)
-
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler(["tagall", "all"], tag_all))
     app.add_handler(CommandHandler("speak", speak))  # ✅ New CommandHandler for /speak
