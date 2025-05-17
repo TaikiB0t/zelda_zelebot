@@ -447,13 +447,13 @@ async def track_users(update: Update, context: ContextTypes.DEFAULT_TYPE):
 def main():
     print("⏳ Waiting 5 seconds before starting the bot...")
     time.sleep(5)  # ⏱️ Delay startup
-
+    print("1")
     """Start the bot"""
     setup_database()  # Ensure database is set up on start
-
+    print("2")
     # ✅ Use post_init to call notify_admin after bot is ready
     app = Application.builder().token(TOKEN).post_init(notify_admin).build()
-
+    print("3")
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler(["tagall", "all"], tag_all))
     app.add_handler(CommandHandler("speak", speak))  # ✅ New CommandHandler for /speak
@@ -461,8 +461,9 @@ def main():
     app.add_handler(CommandHandler(["bridge_or_park", "park_or_bridge", "mist_chy_park", "park_chy_mist",
                                     "bridgeorpark", "parkorbridge", "mistchypark", "parkchymist"], bridge_or_park))
     app.add_handler(CommandHandler(["tea", "dzhokonda"], tea_command))
+    print("4")
     app.add_handler(CallbackQueryHandler(tea_callback, pattern=r"^tea_"))
-
+    print("5")
     app.add_handler(MessageHandler(filters.ALL, track_users))  # Track users who send messages
 
     print("Bot is running...")
